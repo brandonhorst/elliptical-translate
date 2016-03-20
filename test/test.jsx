@@ -31,12 +31,10 @@ describe('elliptical-translate', () => {
         describe () {
           return <literal text='test' />
         },
-      }, {
-        langs: ['default'],
-        describe () {
-          return <literal text='nope' />
-        }
-      }]
+      }],
+      describe () {
+        return <literal text='nope' />
+      }
     }
 
     const process = createProcess(['es-ES'])
@@ -46,19 +44,17 @@ describe('elliptical-translate', () => {
     expect(text(outputs[0])).to.equal('test')
   })
 
-  it('picks a default locale if no match', () => {
+  it('uses the base describe call if no match', () => {
     const Test = {
       translations: [{
         langs: ['es-ES'],
         describe () {
           return <literal text='nope' />
         },
-      }, {
-        langs: ['default'],
-        describe () {
-          return <literal text='test' />
-        }
-      }]
+      }],
+      describe () {
+        return <literal text='test' />
+      }
     }
 
     const process = createProcess(['en-US'])
@@ -74,13 +70,11 @@ describe('elliptical-translate', () => {
         langs: ['es-ES'],
         describe () {
           return <literal text='test' />
-        },
-      }, {
-        langs: ['default'],
-        describe () {
-          return <literal text='nope' />
         }
-      }]
+      }],
+      describe () {
+        return <literal text='nope' />
+      }
     }
 
     const process = createProcess(['Es-eS'])
@@ -101,6 +95,6 @@ describe('elliptical-translate', () => {
     }
 
     const process = createProcess(['en-US'])
-    expect(() => compile(<Test />, process)).to.throw(Error)
+    expect(() => compile(<Test />, process)('')).to.throw(Error)
   })
 })

@@ -2,26 +2,34 @@
 
 Multiple language support for elliptical
 
-Phrases may specify a `translations` array instead of a `describe` function.
+Phrases may specify a `translations` array in addition to a `describe` function.
+An ordered array of language tags should be supplied to `createProcessor`.
+At compilation, the most specific language from the translations will be
+selected. Otherwise, the default `describe` will be used.
 
 ```js
+function usEnglishDescribe () {
+  <literal text='truck' />
+}
+function gbEnglishDescribe () {
+  <literal text='lorry' />
+}
+function spanishDescribe () {
+  return <literal text='camión' />
+}
+
 const MyPhrase = {
   translations: [{
-    langs: ['en', 'default'],
-    describe () {
-      return <literal text='truck' />
-    }
+    langs: ['en'],
+    describe: usEnglishDescribe
   }, {
     langs: ['en-GB', 'en-ZA', 'en-IE', 'en-IN'],
-    describe () {
-      return <literal text='lorry' />
-    }
+    describe: gbEnglishDescribe
   }, {
     langs: ['es'],
-    describe () {
-      return <literal text='camión' />
-    }
-  }]
+    describe: spanishDescribe
+  }],
+  describe: usEnglishDescribe
 }
 ```
 
