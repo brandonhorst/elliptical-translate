@@ -1,6 +1,6 @@
 {
   "name": "elliptical-translate",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0-rc2",
   "description": "Multiple locale support for elliptical phrases",
   "main": "lib/index.js",
   "scripts": {
