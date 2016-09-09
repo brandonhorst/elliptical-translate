@@ -3,8 +3,9 @@ import _ from 'lodash'
 function getCall (translations, locales) {
   const potential = _.chain(locales)
     .map(locale => _.find(translations, (obj) => {
-      const langs = _.map(obj.langs, (lang) => lang.toLowerCase())
-      return _.includes(langs, locale.toLowerCase())
+      const langs = obj.lang ? [obj.lang] : obj.langs
+      const lowerLangs = _.map(langs, lang => lang.toLowerCase())
+      return _.includes(lowerLangs, locale.toLowerCase())
     }))
     .filter()
     .first()

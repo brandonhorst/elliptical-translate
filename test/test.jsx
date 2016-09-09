@@ -24,7 +24,27 @@ describe('elliptical-translate', () => {
     expect(text(outputs[0])).to.equal('test')
   })
 
-  it('picks exact locale if provided', () => {
+  it('picks exact locale if provided (singular)', () => {
+    const Test = {
+      translations: [{
+        lang: 'es-ES',
+        describe () {
+          return <literal text='test' />
+        },
+      }],
+      describe () {
+        return <literal text='nope' />
+      }
+    }
+
+    const process = createProcess(['es-ES'])
+    const parse = compile(<Test />, process)
+    const outputs = parse('')
+    expect(outputs).to.have.length(1)
+    expect(text(outputs[0])).to.equal('test')
+  })
+
+  it('picks exact locale if provided (plural)', () => {
     const Test = {
       translations: [{
         langs: ['es-ES'],

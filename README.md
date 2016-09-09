@@ -8,28 +8,18 @@ At compilation, the most specific language from the translations will be
 selected. Otherwise, the default `describe` will be used.
 
 ```js
-function usEnglishDescribe () {
-  <literal text='truck' />
-}
-function gbEnglishDescribe () {
-  <literal text='lorry' />
-}
-function spanishDescribe () {
-  return <literal text='camión' />
-}
-
 const MyPhrase = {
   translations: [{
     langs: ['en'],
-    describe: usEnglishDescribe
+    describe: () => <literal text='truck' />
   }, {
     langs: ['en-GB', 'en-ZA', 'en-IE', 'en-IN'],
-    describe: gbEnglishDescribe
+    describe: () => <literal text='lorry' />
   }, {
-    langs: ['es'],
-    describe: spanishDescribe
+    lang: 'es',
+    describe: () => <literal text='camión' />
   }],
-  describe: usEnglishDescribe
+  describe: () => <literal text='truck' />
 }
 ```
 
