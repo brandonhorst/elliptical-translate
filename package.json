@@ -52,6 +52,7 @@
     "standard": "^8.0.0"
   },
   "dependencies": {
+    "locale": "^0.1.0",
     "lodash": "^4.15.0"
   },
   "babel": {

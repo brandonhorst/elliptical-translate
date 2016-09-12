@@ -64,6 +64,26 @@ describe('elliptical-translate', () => {
     expect(text(outputs[0])).to.equal('test')
   })
 
+  it('picks generalized locale if provided', () => {
+    const Test = {
+      translations: [{
+        langs: ['es'],
+        describe () {
+          return <literal text='test' />
+        },
+      }],
+      describe () {
+        return <literal text='nope' />
+      }
+    }
+
+    const process = createProcess(['es-ES'])
+    const parse = compile(<Test />, process)
+    const outputs = parse('')
+    expect(outputs).to.have.length(1)
+    expect(text(outputs[0])).to.equal('test')
+  })
+
   it('picks exact locale if provided (wrong case and punct)', () => {
     const Test = {
       translations: [{
