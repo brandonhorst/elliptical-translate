@@ -1,11 +1,15 @@
 import _ from 'lodash'
 
+function normalizeLocale (locale) {
+  return locale.toLowerCase().replace('_', '-')
+}
+
 function getCall (translations, locales) {
   const potential = _.chain(locales)
     .map(locale => _.find(translations, (obj) => {
       const langs = obj.lang ? [obj.lang] : obj.langs
-      const lowerLangs = _.map(langs, lang => lang.toLowerCase())
-      return _.includes(lowerLangs, locale.toLowerCase())
+      const normLangs = _.map(langs, lang => normalizeLocale(lang))
+      return _.includes(normLangs, normalizeLocale(locale))
     }))
     .filter()
     .first()
